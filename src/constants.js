@@ -1,6 +1,11 @@
 const REG_EXP = /^\[(.+)-(\d+)\]$/;
 
 const INPUT = Object.freeze({
+  
+});
+
+const OUTPUT = Object.freeze({
+  WELCOME: '안녕하세요. W편의점입니다.\n현재 보유하고 있는 상품입니다.',
   GET_PRODUCTS:
     '구매하실 상품명과 수량을 입력해 주세요. (예: [사이다-2],[감자칩-1])\n',
 });
@@ -13,4 +18,4 @@ const ERROR = Object.freeze({
   },
 });
 
-export { REG_EXP, INPUT, ERROR };
+export { REG_EXP, INPUT, OUTPUT, ERROR };
