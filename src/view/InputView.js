@@ -24,6 +24,14 @@ const InputView = {
         return acc;
       }, {});
   },
+
+  async getYesNo() {
+    const answer = await Console.readLineAsync();
+    Validator.validateYesNO(answer);
+
+    return answer.toUpperCase();
+  },
+
   validateInput(input) {
     Validator.validateIsNull(input);
     Validator.validateInputFormat(input.split(','));

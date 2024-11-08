@@ -57,4 +57,23 @@ describe('InputView 클래스 테스트', () => {
 
     await expect(InputView.getProducts()).rejects.toThrow('[ERROR]');
   });
+
+  test('알파벳 y 또는 n 입력 시 대문자 Y 또는 N을 반환한다.', async () => {
+    let input = ['y'];
+    mockQuestions(input);
+    let result = await InputView.getYesNo();
+    expect(result).toEqual('Y');
+
+    input = ['n'];
+    mockQuestions(input);
+    result = await InputView.getYesNo();
+    expect(result).toEqual('N');
+  });
+
+  test('대소문자 구분 없이 Y 또는 N이 아닌 입력값이 주어지면 예외가 발생한다.', async () => {
+    const input = ['A'];
+    mockQuestions(input);
+
+    await expect(InputView.getYesNo()).rejects.toThrow('[ERROR]');
+  });
 });
