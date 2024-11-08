@@ -16,7 +16,7 @@ const InputView = {
 
   async getProducts() {
     const productsWithAmount = await Console.readLineAsync();
-    this.validateInput(productsWithAmount);
+    Validator.validateInput(productsWithAmount);
 
     return productsWithAmount
       .split(',')
@@ -32,11 +32,6 @@ const InputView = {
     Validator.validateYesNO(answer);
 
     return answer.toUpperCase();
-  },
-
-  validateInput(input) {
-    Validator.validateIsNull(input);
-    Validator.validateInputFormat(input.split(','));
   },
 };
 
