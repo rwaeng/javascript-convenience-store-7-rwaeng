@@ -31,4 +31,15 @@ describe('OutputView 객체 테스트', () => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
   });
+
+  test('프로모션 적용이 가능한 상품에 대한 안내 메시지를 출력한다.', () => {
+    const logSpy = getLogSpy();
+    const productName = '콜라';
+    const amount = 1;
+
+    OutputView.askToAddFreeProducts(productName, amount);
+
+    const log = `현재 ${productName}은(는) ${amount}개를 무료로 더 받을 수 있습니다. 추가하시겠습니까? (Y/N)`;
+    expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
+  });
 });
