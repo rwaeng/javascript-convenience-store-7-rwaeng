@@ -1,8 +1,7 @@
 import { Console } from '@woowacourse/mission-utils';
 import { readFileSync } from 'fs';
-import { INPUT } from '../constants';
-
-const regExp = /^\[(.+)-(\d+)\]$/;
+import { INPUT, REG_EXP } from '../constants';
+import Validator from '../domain/Validator';
 
 const InputView = {
   readFile(fileName) {
@@ -12,17 +11,22 @@ const InputView = {
 
     return data.slice(1, data.length - 1);
   },
-  
+
   async getProducts() {
     const productsWithAmount = await Console.readLineAsync(INPUT.GET_PRODUCTS);
+    this.validateInput(productsWithAmount);
 
     return productsWithAmount
       .split(',')
-      .map(item => item.match(regExp))
+      .map(item => item.match(REG_EXP))
       .reduce((acc, [, name, quantity]) => {
         acc[name] = Number(quantity);
         return acc;
       }, {});
+  },
+  validateInput(input) {
+    Validator.validateIsNull(input);
+    Validator.validateInputFormat(input.split(','));
   },
 };
 

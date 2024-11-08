@@ -1,3 +1,4 @@
+import { MissionUtils } from '@woowacourse/mission-utils';
 import InputView from '../src/View/InputView';
 
 const mockQuestions = inputs => {
@@ -41,5 +42,19 @@ describe('InputView 클래스 테스트', () => {
 
     const result = await InputView.getProducts();
     expect(result).toEqual({ 사이다: 2, 콜라: 1 });
+  });
+
+  test('아무 것도 입력하지 않으면 예외가 발생한다.', async () => {
+    const input = [];
+    mockQuestions(input);
+
+    await expect(InputView.getProducts()).rejects.toThrow('[ERROR]');
+  });
+
+  test('[상품명-구매 수량]의 정해진 양식을 지키지 않으면 예외가 발생한다.', async () => {
+    const input = ['사이다, 2'];
+    mockQuestions(input);
+
+    await expect(InputView.getProducts()).rejects.toThrow('[ERROR]');
   });
 });
