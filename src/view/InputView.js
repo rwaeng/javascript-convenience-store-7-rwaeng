@@ -1,6 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { readFileSync } from 'fs';
-import { INPUT, REG_EXP } from '../constants';
+import { REG_EXP } from '../constants';
 import Validator from '../domain/Validator';
 
 const InputView = {
@@ -13,7 +13,7 @@ const InputView = {
   },
 
   async getProducts() {
-    const productsWithAmount = await Console.readLineAsync(INPUT.GET_PRODUCTS);
+    const productsWithAmount = await Console.readLineAsync();
     this.validateInput(productsWithAmount);
 
     return productsWithAmount
