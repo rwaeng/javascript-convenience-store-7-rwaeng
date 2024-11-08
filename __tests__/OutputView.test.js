@@ -1,5 +1,6 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
 import OutputView from '../src/view/OutputView';
+import { OUTPUT } from '../src/constants';
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
@@ -8,6 +9,16 @@ const getLogSpy = () => {
 };
 
 describe('OutputView 객체 테스트', () => {
+  test('입력 메시지에 따라 올바른 값을 출력한다.', () => {
+    const logSpy = getLogSpy();
+
+    OutputView.printMessage(OUTPUT.ADDITIONAL_PURCHASE);
+
+    expect(logSpy).toHaveBeenCalledWith(
+      expect.stringContaining(OUTPUT.ADDITIONAL_PURCHASE),
+    );
+  });
+
   test('환영 인사와 함께 상품명, 가격, 프로모션 이름, 재고를 안내한다.', () => {
     const logSpy = getLogSpy();
     const mockProductList = [
@@ -16,15 +27,12 @@ describe('OutputView 객체 테스트', () => {
       { name: '비타민워터', price: '1500', quantity: '6', promotion: 'null' },
     ];
 
-    OutputView.printWelcome(mockProductList);
+    OutputView.printProducts(mockProductList);
 
     const logs = [
-      '안녕하세요. W편의점입니다.',
-      '현재 보유하고 있는 상품입니다.',
       '- 탄산수 1,200원 5개 탄산2+1',
       '- 물 500원 10개',
       '- 비타민워터 1,500원 6개',
-      '구매하실 상품명과 수량을 입력해 주세요. (예: [사이다-2],[감자칩-1])',
     ];
 
     logs.forEach(log => {

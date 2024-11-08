@@ -1,13 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
-import { OUTPUT } from '../constants';
 
 const OutputView = {
-  printWelcome(productList) {
-    Console.print(OUTPUT.WELCOME);
-
-    this.printProducts(productList);
-
-    Console.print(OUTPUT.GET_PRODUCTS);
+  printMessage(message) {
+    Console.print(message);
   },
 
   // 타입 정리 inputView에서 필요
