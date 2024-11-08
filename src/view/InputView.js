@@ -2,14 +2,16 @@ import { Console } from '@woowacourse/mission-utils';
 import { readFileSync } from 'fs';
 import { REG_EXP } from '../constants';
 import Validator from '../domain/Validator';
+import { convertToObjects } from '../utils';
 
 const InputView = {
   readFile(fileName) {
     const data = readFileSync(fileName, 'utf-8')
       .split('\r\n')
-      .map(it => it.trim());
+      .map(line => line.trim())
+      .filter(line => line);
 
-    return data.slice(1, data.length - 1);
+    return convertToObjects(data);
   },
 
   async getProducts() {
