@@ -37,4 +37,12 @@ describe('Stock 클래스 테스트', () => {
 
     expect(products.find(product => product.name === '물').quantity).toBe(10);
   });
+
+  test('상품의 이름을 전달하면 프로모션 여부를 확인하고 프로모션을 반환한다.', () => {
+    expect(stock.getPromotion('초코바')).toBe('MD추천상품');
+  });
+
+  test('상품의 이름과 프로모션을 전달하면 남은 재고의 개수를 반환한다.', () => {
+    expect(stock.getQuantity('초코바', 'MD추천상품')).toBe(5);
+  });
 });

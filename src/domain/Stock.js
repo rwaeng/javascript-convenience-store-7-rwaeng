@@ -48,6 +48,22 @@ class Stock {
     return this.#products;
   }
 
+  getQuantity(name, promotion) {
+    const product = this.#products.find(
+      product => product.name === name && product.promotion === promotion,
+    );
+
+    return product.quantity;
+  }
+
+  getPromotion(name) {
+    const product = this.#products.find(
+      product => product.name === name && product.promotion !== 'null',
+    );
+
+    return product.promotion;
+  }
+
   reduceStock(name, quantity) {
     this.#products = this.#products.map(product => {
       if (product.name === name) {
