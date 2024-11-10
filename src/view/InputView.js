@@ -1,8 +1,8 @@
 import { Console } from '@woowacourse/mission-utils';
 import { readFileSync } from 'fs';
-import { REG_EXP } from '../constants';
-import Validator from '../domain/Validator';
-import { convertToObjects } from '../utils';
+import { REG_EXP } from '../constants.js';
+import Validator from '../domain/Validator.js';
+import { convertToObjects } from '../utils.js';
 
 const InputView = {
   readFile(fileName) {
@@ -15,20 +15,20 @@ const InputView = {
   },
 
   async getProducts() {
-    const productsWithAmount = await Console.readLineAsync();
+    const productsWithAmount = await Console.readLineAsync('');
     Validator.validateInput(productsWithAmount);
 
     return productsWithAmount
       .split(',')
       .map(item => item.match(REG_EXP))
       .reduce((acc, [, name, quantity]) => {
-        acc[name] = Number(quantity);
+        acc.push({ name: name, quantity: Number(quantity) });
         return acc;
-      }, {});
+      }, []);
   },
 
   async getYesNo() {
-    const answer = await Console.readLineAsync();
+    const answer = await Console.readLineAsync('');
     Validator.validateYesNO(answer);
 
     return answer.toUpperCase();

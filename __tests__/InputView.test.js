@@ -41,7 +41,10 @@ describe('InputView 객체 테스트', () => {
     mockQuestions(input);
 
     const result = await InputView.getProducts();
-    expect(result).toEqual({ 사이다: 2, 콜라: 1 });
+    expect(result).toEqual([
+      { name: '사이다', quantity: 2 },
+      { name: '콜라', quantity: 1 },
+    ]);
   });
 
   test('아무 것도 입력하지 않으면 예외가 발생한다.', async () => {
