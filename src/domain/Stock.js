@@ -57,11 +57,15 @@ class Stock {
   }
 
   getPromotion(name) {
-    const product = this.#products.find(
-      product => product.name === name && product.promotion !== 'null',
-    );
+    const product = this.#products.find(product => product.name === name);
 
     return product.promotion;
+  }
+
+  getPrice(name) {
+    const product = this.#products.find(product => product.name === name);
+
+    return product.price;
   }
 
   reduceStock(name, quantity) {
