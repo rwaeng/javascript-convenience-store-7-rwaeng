@@ -113,12 +113,12 @@ class App {
   async run() {
     this.#stock = StockController.initStock();
     await this.play();
+    OutputView.writeFile(this.#stock.getStock());
   }
 
   async play() {
     while (true) {
       const result = await this.start();
-      Console.print(result);
       const more = await restart(() => InputView.getYesNo());
       if (more === 'Y') {
         StockController.updateStock(this.#stock, result);
@@ -166,7 +166,7 @@ class App {
     Console.print('행사할인', `-${promotionSum.toLocaleString()}`);
     let membershipDiscount = 0;
     if (membership) {
-      membershipDiscount = (sum - promotionSum) * 0.3;
+      membershipDiscount = Math.max((sum - promotionSum) * 0.3, 8000);
     }
     Console.print('멤버십할인', `-${membershipDiscount.toLocaleString()}`);
     Console.print('내실돈');

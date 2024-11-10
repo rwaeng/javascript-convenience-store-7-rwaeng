@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { writeFileSync } from 'fs';
 
 const OutputView = {
   printMessage(message) {
@@ -32,7 +33,19 @@ const OutputView = {
     );
   },
 
-  printReceipt() {},
+  writeFile(data) {
+    const filePath = 'public/products.md';
+    const header = 'name,price,quantity,promotion';
+    const rows = data
+      .filter(item => item.quantity > 0)
+      .map(
+        item => `${item.name},${item.price},${item.quantity},${item.promotion}`,
+      )
+      .join('\n');
+    const csvContent = `${header}\n${rows}`;
+
+    writeFileSync(filePath, csvContent, 'utf8');
+  },
 };
 
 export default OutputView;
