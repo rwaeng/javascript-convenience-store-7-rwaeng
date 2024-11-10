@@ -118,7 +118,7 @@ class App {
   async play() {
     while (true) {
       const result = await this.start();
-      console.log(result);
+      Console.print(result);
       const more = await restart(() => InputView.getYesNo());
       if (more === 'Y') {
         StockController.updateStock(this.#stock, result);
@@ -142,7 +142,7 @@ class App {
     let sum = 0;
     cart.forEach(item => {
       if (!item.promotion) {
-        console.log(
+        Console.print(
           item.name,
           item.quantity,
           (item.quantity * stock.getPrice(item.name)).toLocaleString(),
@@ -156,19 +156,19 @@ class App {
     let promotionSum = 0;
     cart.forEach(item => {
       if (item.promotion) {
-        console.log(item.name, item.quantity);
+        Console.print(item.name, item.quantity);
         promotionCount += item.quantity;
         promotionSum += stock.getPrice(item.name) * item.quantity;
       }
     });
     OutputView.printMessage('==================');
-    console.log('총구매액', totalCount, sum.toLocaleString());
-    console.log('행사할인', `-${promotionSum.toLocaleString()}`);
+    Console.print('총구매액', totalCount, sum.toLocaleString());
+    Console.print('행사할인', `-${promotionSum.toLocaleString()}`);
     let membershipDiscount = 0;
     if (membership) {
       membershipDiscount = (sum - promotionSum) * 0.3;
     }
-    console.log('멤버십할인', `-${membershipDiscount.toLocaleString()}`);
+    Console.print('멤버십할인', `-${membershipDiscount.toLocaleString()}`);
     Console.print('내실돈');
     Console.print((sum - promotionSum - membershipDiscount).toLocaleString());
   }
