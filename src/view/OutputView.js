@@ -27,8 +27,12 @@ const OutputView = {
   },
 
   askToPayFullPrice(productName, quantity) {
-    `현재 ${productName} ${quantity}개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)`;
+    Console.print(
+      `현재 ${productName} ${quantity}개는 프로모션 할인이 적용되지 않습니다. 그래도 구매하시겠습니까? (Y/N)`,
+    );
   },
+
+  printReceipt() {},
 };
 
 export default OutputView;
