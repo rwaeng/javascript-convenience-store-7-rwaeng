@@ -29,4 +29,4 @@ async function restart(func) {
   }
 }
 
-export { convertToObjects, insertProductData, restart };
+export { convertToObjects, restart };

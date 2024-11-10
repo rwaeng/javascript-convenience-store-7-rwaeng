@@ -22,4 +22,4 @@ const ERROR = Object.freeze({
   },
 });
 
-export { REG_EXP, INPUT, OUTPUT, ERROR };
+export { REG_EXP, OUTPUT, ERROR };
