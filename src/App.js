@@ -19,7 +19,14 @@ class App {
   async play() {
     while (true) {
       const result = await this.start();
-      const more = await restart(async () => await InputView.getYesNo());
+      const more = await restart(async () => {
+        try {
+          return await InputView.getYesNo();
+        } catch (error) {
+          Console.print(error.message);
+          throw error;
+        }
+      });
 
       if (more === 'Y') {
         StockController.updateStock(this.#stock, result);
@@ -32,11 +39,11 @@ class App {
   async start() {
     this.initCasher();
     const products = await restart(async () => {
-      return await InputView.getProducts(this.#stock);
-    });
-
-    products.forEach(product => {
-      Validator.validateCartItem(this.#stock.getStock(), product);
+      const products = await InputView.getProducts(this.#stock);
+      products.forEach(product => {
+        Validator.validateCartItem(this.#stock.getStock(), product);
+      });
+      return products;
     });
 
     const cart = new Cart(products);
