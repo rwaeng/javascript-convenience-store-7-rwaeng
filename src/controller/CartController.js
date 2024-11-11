@@ -1,6 +1,6 @@
 import Cart from '../domain/Cart.js';
 import Validator from '../domain/Validator.js';
-import InputView from '../View/InputView.js';
+import InputView from '../view/InputView.js';
 
 const CartController = {
   async initCart(stock) {

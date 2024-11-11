@@ -1,21 +1,20 @@
 import { Console } from '@woowacourse/mission-utils';
-import InputView from './View/InputView.js';
+import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
-// import Cart from './domain/Cart.js';
-// import Validator from './domain/Validator.js';
-// import PromotionController from './controller/PromotionController.js';
-// import CartController from './controller/CartController.js';
-// import StockController from './controller/StockController.js';
-// import { restart } from './utils.js';
-// import { OUTPUT } from './constants.js';
+import Cart from './domain/Cart.js';
+import Validator from './domain/Validator.js';
+import PromotionController from './controller/PromotionController.js';
+import CartController from './controller/CartController.js';
+import StockController from './controller/StockController.js';
+import { restart } from './utils.js';
+import { OUTPUT } from './constants.js';
 
 class App {
   #stock;
 
   async run() {
-    // this.#stock = StockController.initStock();
-    // const result = await this.start();
-    // await this.play();
+    this.#stock = StockController.initStock();
+    await this.play();
   }
 
   async play() {

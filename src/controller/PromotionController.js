@@ -1,6 +1,6 @@
 import { DateTimes } from '@woowacourse/mission-utils';
 import Promotion from '../domain/Promotion.js';
-import InputView from '../View/InputView.js';
+import InputView from '../view/InputView.js';
 
 const PromotionController = {
   async initPromotion() {

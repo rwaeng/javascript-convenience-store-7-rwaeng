@@ -1,5 +1,5 @@
 import Stock from '../domain/Stock.js';
-import InputView from '../View/InputView.js';
+import InputView from '../view/InputView.js';
 
 const StockController = {
   initStock() {
