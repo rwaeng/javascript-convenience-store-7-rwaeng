@@ -6,8 +6,8 @@ import Validator from './domain/Validator.js';
 import PromotionController from './controller/PromotionController.js';
 import CartController from './controller/CartController.js';
 import StockController from './controller/StockController.js';
-import { restart } from './utils.js';
 import { OUTPUT } from './constants.js';
+import restart from './restart.js';
 
 class App {
   #stock;
@@ -32,7 +32,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await restart(() => this.initializeCart());
+    const cart = await restart(this.initializeCart);
     // const promotion = await PromotionController.initPromotion();
     // await this.applyPromotionsToCart(cart, promotion);
     // const membership = await this.checkMembershipDiscount();

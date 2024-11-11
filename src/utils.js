@@ -19,14 +19,4 @@ function convertToObject(keys, row) {
   return object;
 }
 
-async function restart(func) {
-  while (true) {
-    try {
-      return await func();
-    } catch (error) {
-      Console.print(error.message);
-    }
-  }
-}
-
-export { convertToObjects, restart };
+export { convertToObjects };
