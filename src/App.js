@@ -31,7 +31,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await restart(() => this.initializeCart());
+    const cart = await this.initializeCart();
     const promotion = await PromotionController.initPromotion();
     await this.applyPromotionsToCart(cart, promotion);
     const membership = await this.checkMembershipDiscount();
@@ -49,12 +49,17 @@ class App {
   }
 
   async initializeCart() {
-    const products = await InputView.getProducts();
-    products.forEach(product => {
-      Validator.validateCartItem(this.#stock.getStock(), product);
-    });
-
-    return new Cart(products);
+    while (true) {
+      const products = await InputView.getProducts();
+      try {
+        products.forEach(product => {
+          Validator.validateCartItem(this.#stock.getStock(), product);
+        });
+      } catch (error) {
+        Console.print(error.message);
+      }
+      return new Cart(products);
+    }
   }
 
   async applyPromotionsToCart(cart, promotion) {
