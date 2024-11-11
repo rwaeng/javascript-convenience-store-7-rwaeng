@@ -32,7 +32,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await this.initializeCart();
+    const cart = await restart(() => this.initializeCart());
     // const promotion = await PromotionController.initPromotion();
     // await this.applyPromotionsToCart(cart, promotion);
     // const membership = await this.checkMembershipDiscount();
@@ -50,18 +50,11 @@ class App {
   }
 
   async initializeCart() {
-    let products;
-    while (true) {
-      try {
-        products = await restart(() => InputView.getProducts());
-        products.forEach(product => {
-          Validator.validateCartItem(this.#stock.getStock(), product);
-        });
-        break;
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
+    const products = await InputView.getProducts();
+    products.forEach(product => {
+      Validator.validateCartItem(this.#stock.getStock(), product);
+    });
+
     return new Cart(products);
   }
 
