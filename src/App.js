@@ -31,7 +31,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const products = await restart(() => InputView.getProducts(this.#stock));
+    const products = await InputView.getProducts(this.#stock);
     const cart = new Cart(products);
     const promotion = await PromotionController.initPromotion();
     await this.applyPromotionsToCart(cart, promotion);
@@ -47,16 +47,6 @@ class App {
     const stockData = this.#stock.getStock();
     OutputView.printProducts(stockData);
     OutputView.printMessage(OUTPUT.GET_PRODUCTS);
-  }
-
-  async retry(func) {
-    while (true) {
-      try {
-        return await func(this.#stock);
-      } catch (error) {
-        Console.print(error.message);
-      }
-    }
   }
 
   async applyPromotionsToCart(cart, promotion) {
