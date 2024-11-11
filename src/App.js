@@ -31,12 +31,14 @@ class App {
 
   async start() {
     this.initCasher();
-    const products = await restart(
-      async () => await InputView.getProducts(this.#stock),
-    );
-    products.forEach(product => {
-      Validator.validateCartItem(stock.getStock(), product);
+    const products = await restart(async () => {
+      return await InputView.getProducts(this.#stock);
     });
+
+    products.forEach(product => {
+      Validator.validateCartItem(this.#stock.getStock(), product);
+    });
+
     const cart = new Cart(products);
     const promotion = await PromotionController.initPromotion();
     await this.applyPromotionsToCart(cart, promotion);
