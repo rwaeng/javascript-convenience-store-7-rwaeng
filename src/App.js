@@ -32,7 +32,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await restart(() => InputView.getProducts());
+    const cart = await this.initializeCart();
     // const promotion = await PromotionController.initPromotion();
     // await this.applyPromotionsToCart(cart, promotion);
     // const membership = await this.checkMembershipDiscount();
@@ -53,7 +53,7 @@ class App {
     let products;
     while (true) {
       try {
-        products = await InputView.getProducts();
+        products = await restart(() => InputView.getProducts());
         products.forEach(product => {
           Validator.validateCartItem(this.#stock.getStock(), product);
         });
