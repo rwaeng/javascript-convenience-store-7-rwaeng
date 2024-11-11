@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { writeFileSync } from 'fs';
+// import { writeFileSync } from 'fs';
 
 const OutputView = {
   printMessage(message) {
@@ -42,7 +42,7 @@ const OutputView = {
         item => `${item.name},${item.price},${item.quantity},${item.promotion}`,
       )
       .join('\n');
-    const csvContent = `${header}\n${rows}`;
+    const csvContent = `${header}\n${rows}\n`;
 
     writeFileSync(filePath, csvContent, 'utf8');
   },

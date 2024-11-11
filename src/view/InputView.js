@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-import { readFileSync } from 'fs';
+// import { readFileSync } from 'fs';
 import { REG_EXP } from '../constants.js';
 import Validator from '../domain/Validator.js';
 import { convertToObjects } from '../utils.js';
