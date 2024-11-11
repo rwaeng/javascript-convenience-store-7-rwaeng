@@ -49,14 +49,16 @@ class App {
   }
 
   async initializeCart() {
+    let products;
     while (true) {
-      const products = await InputView.getProducts();
       try {
+        products = await InputView.getProducts();
         products.forEach(product => {
           Validator.validateCartItem(this.#stock.getStock(), product);
         });
       } catch (error) {
         Console.print(error.message);
+        return await this.initializeCart();
       }
       return new Cart(products);
     }
