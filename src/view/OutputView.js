@@ -33,18 +33,61 @@ const OutputView = {
     );
   },
 
-  writeFile(data) {
-    const filePath = 'public/products.md';
-    const header = 'name,price,quantity,promotion';
-    const rows = data
-      .filter(item => item.quantity > 0)
-      .map(
-        item => `${item.name},${item.price},${item.quantity},${item.promotion}`,
-      )
-      .join('\n');
-    const csvContent = `${header}\n${rows}\n`;
+  printReceipt(cart, stock, membership) {
+    OutputView.printMessage('======편의점=======');
+    OutputView.printMessage('상품명 수량 금액');
+    const { totalCount, sum } = this.printRegularItems(cart, stock);
+    OutputView.printMessage('=======증정=======');
+    const { promotionCount, promotionSum } = this.printPromotionItems(
+      cart,
+      stock,
+    );
+    OutputView.printMessage('==================');
+    this.printFinalAmount(totalCount, sum, promotionSum, membership);
+  },
 
-    writeFileSync(filePath, csvContent, 'utf8');
+  printRegularItems(cart, stock) {
+    let totalCount = 0;
+    let sum = 0;
+    cart.forEach(item => {
+      if (!item.promotion) {
+        Console.print(
+          `${item.name}      ${item.quantity}      ${(item.quantity * stock.getPrice(item.name)).toLocaleString()}`,
+        );
+        totalCount += item.quantity;
+        sum += stock.getPrice(item.name) * item.quantity;
+      }
+    });
+    return { totalCount, sum };
+  },
+
+  printPromotionItems(cart, stock) {
+    let promotionCount = 0;
+    let promotionSum = 0;
+    cart.forEach(item => {
+      if (item.promotion) {
+        Console.print(`${item.name}      ${item.quantity}`);
+        promotionCount += item.quantity;
+        promotionSum += stock.getPrice(item.name) * item.quantity;
+      }
+    });
+    return { promotionCount, promotionSum };
+  },
+
+  printFinalAmount(totalCount, sum, promotionSum, membership) {
+    Console.print(`총구매액   ${totalCount}   ${sum.toLocaleString()}`);
+    Console.print(`행사할인      -${promotionSum.toLocaleString()}`);
+    let membershipDiscount = 0;
+    if (membership) {
+      membershipDiscount = Math.min(
+        (sum - promotionSum) * 0.3 - (((sum - promotionSum) * 0.3) % 1000),
+        8000,
+      );
+    }
+    Console.print(`멤버십할인      -${membershipDiscount.toLocaleString()}`);
+    Console.print(
+      `내실돈 ${(sum - promotionSum - membershipDiscount).toLocaleString()}`,
+    );
   },
 };
 
