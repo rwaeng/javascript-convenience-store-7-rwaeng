@@ -1,4 +1,3 @@
-import { Console } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import Cart from './domain/Cart.js';
