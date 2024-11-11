@@ -14,8 +14,7 @@ class App {
 
   async run() {
     this.#stock = StockController.initStock();
-    await this.start();
-    // await this.play();
+    await this.play();
   }
 
   async play() {
@@ -24,7 +23,7 @@ class App {
       const more = await restart(() => InputView.getYesNo());
 
       if (more === 'Y') {
-        StockController.updateStock(this.#stock, result);
+        // StockController.updateStock(this.#stock, result);
         continue;
       }
       break;
