@@ -6,6 +6,7 @@ import CartController from './controller/CartController.js';
 import StockController from './controller/StockController.js';
 import { OUTPUT } from './constants.js';
 import restart from './restart.js';
+import { Console } from '@woowacourse/mission-utils';
 
 class App {
   #stock;
@@ -31,7 +32,20 @@ class App {
 
   async start() {
     this.initCasher();
-    const products = await InputView.getProducts(this.#stock);
+    let products;
+    while (true) {
+      try {
+        products = await InputView.getProducts(this.#stock);
+      } catch (e) {
+        Console.print(e.message);
+      }
+
+      if (!products) {
+        continue;
+      }
+      break;
+    }
+
     const cart = new Cart(products);
     const promotion = await PromotionController.initPromotion();
     await this.applyPromotionsToCart(cart, promotion);
