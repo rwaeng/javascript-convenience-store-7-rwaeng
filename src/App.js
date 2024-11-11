@@ -13,8 +13,8 @@ class App {
   #stock;
 
   async run() {
-    this.#stock = StockController.initStock();
-    const result = await this.start();
+    // this.#stock = StockController.initStock();
+    // const result = await this.start();
     // await this.play();
   }
 
