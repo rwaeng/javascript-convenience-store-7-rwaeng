@@ -23,7 +23,7 @@ class App {
       const more = await restart(() => InputView.getYesNo());
 
       if (more === 'Y') {
-        // StockController.updateStock(this.#stock, result);
+        StockController.updateStock(this.#stock, result);
         continue;
       }
       break;
@@ -32,14 +32,15 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await CartController.initCart(this.#stock);
-    // const promotion = await PromotionController.initPromotion();
-    // await this.applyPromotionsToCart(cart, promotion);
-    // const membership = await this.checkMembershipDiscount();
-    // this.printReceipt(cart.getCartItems(), this.#stock, membership);
-    // OutputView.printMessage(OUTPUT.ADDITIONAL_PURCHASE);
+    const cart = await this.initializeCart();
+    // const cart = await CartController.initCart(this.#stock);
+    const promotion = await PromotionController.initPromotion();
+    await this.applyPromotionsToCart(cart, promotion);
+    const membership = await this.checkMembershipDiscount();
+    this.printReceipt(cart.getCartItems(), this.#stock, membership);
+    OutputView.printMessage(OUTPUT.ADDITIONAL_PURCHASE);
 
-    // return cart.getCartItems();
+    return cart.getCartItems();
   }
 
   initCasher() {
