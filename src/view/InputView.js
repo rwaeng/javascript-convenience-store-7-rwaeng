@@ -14,17 +14,23 @@ const InputView = {
     return convertToObjects(data);
   },
 
-  async getProducts() {
+  async getProducts(stock) {
     const productsWithAmount = await Console.readLineAsync('');
     Validator.validateInput(productsWithAmount);
 
-    return productsWithAmount
+    const products = productsWithAmount
       .split(',')
       .map(item => item.match(REG_EXP))
       .reduce((acc, [, name, quantity]) => {
         acc.push({ name: name, quantity: Number(quantity) });
         return acc;
       }, []);
+
+    products.forEach(product => {
+      Validator.validateCartItem(stock.getStock(), product);
+    });
+
+    return products;
   },
 
   async getYesNo() {

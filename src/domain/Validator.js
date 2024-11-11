@@ -41,13 +41,9 @@ const Validator = {
   },
 
   validateCartItem(stock, product) {
-    try {
-      this.validateExistProductName(stock, product);
-      this.validateUnderQuantity(product);
-      this.validateOverQuantity(stock, product);
-    } catch (error) {
-      throw error;
-    }
+    this.validateExistProductName(stock, product);
+    this.validateUnderQuantity(product);
+    this.validateOverQuantity(stock, product);
   },
 };
 
