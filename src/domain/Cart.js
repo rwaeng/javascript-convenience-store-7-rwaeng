@@ -19,11 +19,14 @@ class Cart {
   }
 
   addPromotionItem(itemName, itemQuantity) {
-    this.#cartItems.push({
-      promotion: true,
-      name: itemName,
-      quantity: itemQuantity,
-    });
+    this.#cartItems = [
+      ...this.#cartItems,
+      {
+        promotion: true,
+        name: itemName,
+        quantity: itemQuantity,
+      },
+    ];
   }
 
   removeCartItem(itemName, itemQuantity) {
