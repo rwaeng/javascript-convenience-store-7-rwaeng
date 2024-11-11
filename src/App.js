@@ -49,13 +49,13 @@ class App {
   }
 
   async initializeCart() {
-    const products = await restart(async () => {
-      const products = await InputView.getProducts();
-      products.forEach(product => {
-        Validator.validateCartItem(this.#stock.getStock(), product);
-      });
-      return products;
+    // const products = await restart(async () => {
+    const products = await InputView.getProducts();
+    products.forEach(product => {
+      Validator.validateCartItem(this.#stock.getStock(), product);
     });
+    //   return products;
+    // });
 
     return new Cart(products);
   }
