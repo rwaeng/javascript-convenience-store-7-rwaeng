@@ -2,7 +2,6 @@ import { Console } from '@woowacourse/mission-utils';
 import InputView from './view/InputView.js';
 import OutputView from './view/OutputView.js';
 import Cart from './domain/Cart.js';
-import Validator from './domain/Validator.js';
 import PromotionController from './controller/PromotionController.js';
 import CartController from './controller/CartController.js';
 import StockController from './controller/StockController.js';
@@ -33,7 +32,6 @@ class App {
   async start() {
     this.initCasher();
     const cart = await this.initializeCart();
-    // const cart = await CartController.initCart(this.#stock);
     const promotion = await PromotionController.initPromotion();
     await this.applyPromotionsToCart(cart, promotion);
     const membership = await this.checkMembershipDiscount();
@@ -51,7 +49,7 @@ class App {
   }
 
   async initializeCart() {
-    const products = await restart(() => InputView.getProducts(this.#stock));
+    const products = await InputView.getProducts(this.#stock);
 
     return new Cart(products);
   }
