@@ -21,9 +21,10 @@ class App {
     while (true) {
       const result = await this.start();
       const more = await restart(() => InputView.getYesNo());
+
       if (more === 'Y') {
-        StockController.updateStock(this.#stock, result);
-        return await this.play();
+        // StockController.updateStock(this.#stock, result);
+        continue;
       }
       break;
     }
