@@ -14,14 +14,13 @@ class App {
 
   async run() {
     this.#stock = StockController.initStock();
-    // const result = await this.start();
     await this.play();
   }
 
   async play() {
     while (true) {
       const result = await this.start();
-      const more = await restart(InputView.getYesNo);
+      const more = await restart(() => InputView.getYesNo());
       if (more === 'Y') {
         StockController.updateStock(this.#stock, result);
         return await this.play();
@@ -39,7 +38,7 @@ class App {
     this.printReceipt(cart.getCartItems(), this.#stock, membership);
     OutputView.printMessage(OUTPUT.ADDITIONAL_PURCHASE);
 
-    // return cart.getCartItems();
+    return cart.getCartItems();
   }
 
   initCasher() {
