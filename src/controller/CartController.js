@@ -1,3 +1,4 @@
+import { Console } from '@woowacourse/mission-utils';
 import Cart from '../domain/Cart.js';
 import Validator from '../domain/Validator.js';
 import InputView from '../view/InputView.js';
@@ -5,11 +6,20 @@ import restart from '../restart.js';
 
 const CartController = {
   async initCart(stock) {
-    const products = await InputView.getProducts();
+    let products;
+    while (true) {
+      try {
+        products = await InputView.getProducts();
 
-    products.forEach(product => {
-      Validator.validateCartItem(stock.getStock(), product);
-    });
+        products.forEach(product => {
+          Validator.validateCartItem(stock.getStock(), product);
+        });
+
+        break;
+      } catch (error) {
+        Console.print(error.message);
+      }
+    }
 
     const cart = new Cart(products);
     return cart;
