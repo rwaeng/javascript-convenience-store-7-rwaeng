@@ -31,14 +31,14 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await restart(async () => await this.initializeCart());
-    const promotion = await PromotionController.initPromotion();
-    await this.applyPromotionsToCart(cart, promotion);
-    const membership = await this.checkMembershipDiscount();
-    this.printReceipt(cart.getCartItems(), this.#stock, membership);
-    OutputView.printMessage(OUTPUT.ADDITIONAL_PURCHASE);
+    const cart = await restart(() =>  this.initializeCart());
+    // const promotion = await PromotionController.initPromotion();
+    // await this.applyPromotionsToCart(cart, promotion);
+    // const membership = await this.checkMembershipDiscount();
+    // this.printReceipt(cart.getCartItems(), this.#stock, membership);
+    // OutputView.printMessage(OUTPUT.ADDITIONAL_PURCHASE);
 
-    return cart.getCartItems();
+    // return cart.getCartItems();
   }
 
   initCasher() {
