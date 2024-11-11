@@ -50,12 +50,17 @@ class App {
   }
 
   async initializeCart() {
-    const products = await InputView.getProducts();
-    products.forEach(product => {
-      Validator.validateCartItem(this.#stock.getStock(), product);
-    });
-
-    return new Cart(products);
+    while (true) {
+      try {
+        const products = await InputView.getProducts();
+        products.forEach(product => {
+          Validator.validateCartItem(this.#stock.getStock(), product);
+        });
+      } catch (error) {
+        Console.print(error.message);
+      }
+      return new Cart(products);
+    }
   }
 
   async applyPromotionsToCart(cart, promotion) {
