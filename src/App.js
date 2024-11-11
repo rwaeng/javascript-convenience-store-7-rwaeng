@@ -31,7 +31,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await this.initializeCart();
+    const cart = await restart(this.initializeCart());
     const promotion = await PromotionController.initPromotion();
     await this.applyPromotionsToCart(cart, promotion);
     const membership = await this.checkMembershipDiscount();
