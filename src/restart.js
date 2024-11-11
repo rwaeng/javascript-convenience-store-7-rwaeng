@@ -1,9 +1,10 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console } from '@woowacourse/mission-utils';
 
 async function restart(func) {
   while (true) {
     try {
-      return await func();
+      await func();
+      break;
     } catch (error) {
       Console.print(error.message);
     }
