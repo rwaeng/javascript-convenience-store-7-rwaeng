@@ -76,7 +76,7 @@ class Stock {
           product.quantity -= total;
           total = 0;
         } else {
-          quantity -= product.quantity;
+          total -= product.quantity;
           product.quantity = 0;
         }
       }
@@ -87,7 +87,7 @@ class Stock {
           product.quantity -= total;
           total = 0;
         } else {
-          quantity -= product.quantity;
+          total -= product.quantity;
           product.quantity = 0;
         }
       }
