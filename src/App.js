@@ -48,7 +48,7 @@ class App {
   }
 
   async initializeCart() {
-    const products = await InputView.getProducts(this.#stock);
+    const products = await restart(() => InputView.getProducts(this.#stock));
 
     return new Cart(products);
   }
