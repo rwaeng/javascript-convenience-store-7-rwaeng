@@ -6,21 +6,20 @@ import CartController from './controller/CartController.js';
 import StockController from './controller/StockController.js';
 import { OUTPUT } from './constants.js';
 import restart from './restart.js';
-import { Console } from '@woowacourse/mission-utils';
+import Validator from './domain/Validator.js';
 
 class App {
   #stock;
 
   async run() {
     this.#stock = StockController.initStock();
-    // await this.play();
-    await this.start();
+    await this.play();
   }
 
   async play() {
     while (true) {
       const result = await this.start();
-      const more = await restart(() => InputView.getYesNo());
+      const more = await restart(async () => await InputView.getYesNo());
 
       if (more === 'Y') {
         StockController.updateStock(this.#stock, result);
@@ -32,20 +31,12 @@ class App {
 
   async start() {
     this.initCasher();
-    let products;
-    while (true) {
-      try {
-        products = await InputView.getProducts(this.#stock);
-      } catch (e) {
-        Console.print(e.message);
-      }
-
-      if (!products) {
-        continue;
-      }
-      break;
-    }
-
+    const products = await restart(
+      async () => await InputView.getProducts(this.#stock),
+    );
+    products.forEach(product => {
+      Validator.validateCartItem(stock.getStock(), product);
+    });
     const cart = new Cart(products);
     const promotion = await PromotionController.initPromotion();
     await this.applyPromotionsToCart(cart, promotion);
