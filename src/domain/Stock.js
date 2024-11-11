@@ -69,11 +69,28 @@ class Stock {
   }
 
   reduceStock(name, quantity) {
-    this.#products = this.#products.map(product => {
-      if (product.name === name) {
-        return { ...product, quantity: product.quantity - quantity };
+    let total = quantity;
+    this.#products.forEach(product => {
+      if (product.name === name && product.promotion !== 'null') {
+        if (product.quantity >= total) {
+          product.quantity -= total;
+          total = 0;
+        } else {
+          quantity -= product.quantity;
+          product.quantity = 0;
+        }
       }
-      return product;
+    });
+    this.#products.forEach(product => {
+      if (product.name === name && product.promotion === 'null') {
+        if (product.quantity >= total) {
+          product.quantity -= total;
+          total = 0;
+        } else {
+          quantity -= product.quantity;
+          product.quantity = 0;
+        }
+      }
     });
   }
 }
