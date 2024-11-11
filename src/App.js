@@ -21,7 +21,7 @@ class App {
   async play() {
     while (true) {
       const result = await this.start();
-      const more = await restart(() => InputView.getYesNo());
+      const more = await restart(InputView.getYesNo);
       if (more === 'Y') {
         StockController.updateStock(this.#stock, result);
         return await this.play();
@@ -32,7 +32,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await restart(() => this.initializeCart());
+    const cart = await restart(this.initializeCart);
     // const promotion = await PromotionController.initPromotion();
     // await this.applyPromotionsToCart(cart, promotion);
     // const membership = await this.checkMembershipDiscount();
