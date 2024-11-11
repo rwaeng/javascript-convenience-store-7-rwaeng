@@ -11,9 +11,9 @@ const CartController = {
       try {
         products = await InputView.getProducts();
 
-        products.forEach(product => {
+        for (const product of products) {
           Validator.validateCartItem(stock.getStock(), product);
-        });
+        }
 
         break;
       } catch (error) {
