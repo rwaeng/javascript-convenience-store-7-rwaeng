@@ -3,7 +3,7 @@ import InputView from '../view/InputView.js';
 
 const StockController = {
   initStock() {
-    // const productData = InputView.readFile('public/products.md');
+    const productData = InputView.readFile('public/products.md');
     const stock = new Stock(productData);
 
     return stock;
