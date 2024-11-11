@@ -50,7 +50,7 @@ class App {
 
   async initializeCart() {
     // const products = await restart(async () => {
-    const products = await InputView.getProducts();
+    const products = await restart(() => InputView.getProducts());
     products.forEach(product => {
       Validator.validateCartItem(this.#stock.getStock(), product);
     });
