@@ -40,10 +40,6 @@ const CartController = {
   async addCartItem(cart, name, quantity, promoCount) {
     const answer = await restart(() => InputView.getYesNo());
 
-    if (answer === 'N') {
-      cart.removeCartItem(name, quantity);
-      cart.addPromotionItem(name, promoCount);
-    }
     if (answer === 'Y') {
       cart.addCartItem(name, quantity);
       cart.addPromotionItem(name, quantity);
