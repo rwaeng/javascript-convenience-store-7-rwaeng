@@ -1,6 +1,7 @@
 import Cart from '../domain/Cart.js';
 import Validator from '../domain/Validator.js';
 import InputView from '../view/InputView.js';
+import restart from '../restart.js';
 
 const CartController = {
   async initCart(stock) {
@@ -15,7 +16,7 @@ const CartController = {
   },
 
   async addRemoveCartItem(cart, item, quantity, count) {
-    const answer = await InputView.getYesNo();
+    const answer = await restart(() => InputView.getYesNo());
 
     if (answer === 'N') {
       cart.removeCartItem(item.name, quantity);
@@ -27,7 +28,7 @@ const CartController = {
   },
 
   async addCartItem(cart, name, quantity, promoCount) {
-    const answer = await InputView.getYesNo();
+    const answer = await restart(() => InputView.getYesNo());
 
     if (answer === 'N') {
       cart.addPromotionItem(name, promoCount);

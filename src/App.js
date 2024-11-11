@@ -127,7 +127,7 @@ class App {
 
   async checkMembershipDiscount() {
     OutputView.printMessage(OUTPUT.MEMBERSHIP_DISCOUNT);
-    const answer = await InputView.getYesNo();
+    const answer = await restart(() => InputView.getYesNo());
     return answer === 'Y';
   }
 
