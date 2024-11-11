@@ -14,7 +14,7 @@ class App {
 
   async run() {
     this.#stock = StockController.initStock();
-    const result = await this.start();
+    // const result = await this.start();
     // await this.play();
   }
 
