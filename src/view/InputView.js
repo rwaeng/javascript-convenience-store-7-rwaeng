@@ -15,29 +15,26 @@ const InputView = {
   },
 
   async getProducts(stock) {
-    const stockData = stock;
-    let products;
-    try {
-      const productsWithAmount = await Console.readLineAsync('');
-      Validator.validateInput(productsWithAmount);
+    const productsWithAmount = await Console.readLineAsync('');
+    Validator.validateInput(productsWithAmount);
 
-      products = productsWithAmount
-        .split(',')
-        .map(item => item.match(REG_EXP))
-        .reduce((acc, [, name, quantity]) => {
-          acc.push({ name: name, quantity: Number(quantity) });
-          return acc;
-        }, []);
+    const products = productsWithAmount
+      .split(',')
+      .map(item => item.match(REG_EXP))
+      .reduce((acc, [, name, quantity]) => {
+        acc.push({ name: name, quantity: Number(quantity) });
+        return acc;
+      }, []);
 
-      products.forEach(product => {
-        Validator.validateCartItem(stockData.getStock(), product);
-      });
+    products.forEach(product => {
+      try {
+        Validator.validateCartItem(stock.getStock(), product);
+      } catch (e) {
+        throw e;
+      }
+    });
 
-      return products;
-    } catch (error) {
-      Console.print(error.message);
-      await this.getProducts(stockData);
-    }
+    return products;
   },
 
   async getYesNo() {
