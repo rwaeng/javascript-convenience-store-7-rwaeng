@@ -14,7 +14,8 @@ class App {
 
   async run() {
     this.#stock = StockController.initStock();
-    await this.play();
+    await this.start();
+    // await this.play();
   }
 
   async play() {
@@ -23,7 +24,7 @@ class App {
       const more = await restart(() => InputView.getYesNo());
 
       if (more === 'Y') {
-        // StockController.updateStock(this.#stock, result);
+        StockController.updateStock(this.#stock, result);
         continue;
       }
       break;
@@ -32,7 +33,7 @@ class App {
 
   async start() {
     this.initCasher();
-    const cart = await restart(() =>  this.initializeCart());
+    const cart = await restart(() => this.initializeCart());
     // const promotion = await PromotionController.initPromotion();
     // await this.applyPromotionsToCart(cart, promotion);
     // const membership = await this.checkMembershipDiscount();
