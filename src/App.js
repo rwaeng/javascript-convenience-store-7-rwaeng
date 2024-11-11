@@ -6,14 +6,14 @@ import CartController from './controller/CartController.js';
 import StockController from './controller/StockController.js';
 import { OUTPUT } from './constants.js';
 import restart from './restart.js';
-import { Console } from '@woowacourse/mission-utils';
 
 class App {
   #stock;
 
   async run() {
     this.#stock = StockController.initStock();
-    await this.play();
+    // await this.play();
+    await this.start();
   }
 
   async play() {
@@ -47,6 +47,12 @@ class App {
     const stockData = this.#stock.getStock();
     OutputView.printProducts(stockData);
     OutputView.printMessage(OUTPUT.GET_PRODUCTS);
+  }
+
+  async initializeCart() {
+    const products = await InputView.getProducts(this.#stock);
+
+    return new Cart(products);
   }
 
   async applyPromotionsToCart(cart, promotion) {
