@@ -1,5 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
-// import { writeFileSync } from 'fs';
+import { writeFileSync } from 'fs';
 
 const OutputView = {
   printMessage(message) {

@@ -1,13 +1,13 @@
-import { OUTPUT } from './constants.js';
-import InputView from './View/InputView.js';
-import OutputView from './view/OutputView.js';
-import { restart } from './utils.js';
-import PromotionController from './controller/PromotionController.js';
-import CartController from './controller/CartController.js';
-import StockController from './controller/StockController.js';
-import Cart from './domain/Cart.js';
-import Validator from './domain/Validator.js';
-import { Console } from '@woowacourse/mission-utils';
+// import { OUTPUT } from './constants.js';
+// import InputView from './View/InputView.js';
+// import OutputView from './view/OutputView.js';
+// import { restart } from './utils.js';
+// import PromotionController from './controller/PromotionController.js';
+// import CartController from './controller/CartController.js';
+// import StockController from './controller/StockController.js';
+// import Cart from './domain/Cart.js';
+// import Validator from './domain/Validator.js';
+// import { Console } from '@woowacourse/mission-utils';
 
 class App {
   #stock;
